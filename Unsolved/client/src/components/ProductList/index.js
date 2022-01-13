@@ -6,11 +6,14 @@ import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
+import {useDispatch,useSelector} from 'rewct-redux';
+import {selectCategory, selectProduct} from '../../utils/selector';
 
 function ProductList() {
-  const [state, dispatch] = useStoreContext();
+  const dispatch = useDispatch();
 
-  const { currentCategory } = state;
+  const { currentCategory } = useSelector(selectCategory);
+  const products = useSelector(selectCategory);
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
